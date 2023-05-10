@@ -44,5 +44,9 @@ int main(int ac, char **argv)
                                 break;
                         }
                         cmd_type = determine_command_type(current_cmd[0]);
+			initializer(current_cmd, cmd_type);
+                        free(current_cmd);
+		 }
+                free(cmds);
 	}
 }
