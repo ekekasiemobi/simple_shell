@@ -12,7 +12,6 @@ int main(int ac, char **argv)
 {
 	char *user_input;
 	ssize_t fd_check;
-	char **receive_argv;
 	char **args;
 	(void)ac;
 	(void)argv;
@@ -28,17 +27,5 @@ int main(int ac, char **argv)
 		fd_check = 0;
 
 		user_input = prompt_read(&fd_check);
-		/* parse user's command */
-		receive_argv = parse_user_input(user_input, args, fd_check);
-		/* execute user's command */
-
-		command = get_command(receive_argv[0]);
-		if (command != NULL)
-		{
-			(*command)();
-			continue;
-		}
-		execute_command(receive_argv);
-		fflush(stdout);
 	}
 }
