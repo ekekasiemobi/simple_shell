@@ -24,7 +24,7 @@ void execute_command(char **receive_argv)
 
 		if (child_process == -1)
 		{
-			perror("fork");
+			print_error(receive_argv, "No such file or directory\n");
 			exit(EXIT_FAILURE);
 		}
 		else if (child_process == 0)
@@ -34,18 +34,18 @@ void execute_command(char **receive_argv)
 
 			if (execve(final_cmd, receive_argv, NULL) == -1)
 			{
-				perror("execve");
-				_exit(EXIT_FAILURE);
+				print_error(receive_argv, "No such file or directory\n");
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
 		{
-			pid_t terminated_process = waitpid(child_process, &process_status, 0);
-			if (terminated_process == -1)
+			if (waitpid(child_process, &process_status, 0) == -1)
 			{
-				perror("waitpid");
+				print_error(receive_argv, "No such file or directory\n");
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
 }
+
