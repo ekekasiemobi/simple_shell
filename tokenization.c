@@ -1,31 +1,48 @@
 #include "main.h"
 
+
 /**
- * tokenize_string - Splits a string into an array of tokens.
- * @string: The string to tokenize.
- * @delimiter: The character to use as a delimiter.
- *
- * Return: An array of tokens.
+ * parse_user_input - split user's command strings
+ * @take_user_input: pointer to user_input
+ * @argv: array of pointer to strings
+ * @fd_check: size of input read in bytes
+ * Return: array of pointer to strings
  */
-char **tokenizer(char *string, char *delimiter)
+
+char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
 {
-        int num_delimiter = 0;
-        char **av = NULL;
-        char *token = NULL;
-        char *save_ptr = NULL;
+	char *user_input_copy, *parse_token;
+	const char *delimiter;
+	int token_count = 0, num = 0;
 
-        token = _strtok_r(string, delimiter, &save_ptr);
+	delimiter = " \n";
 
-        while (token != NULL)
-        {
-                av = realloc(av, sizeof(*av) * (num_delimiter + 1));
-                av[num_delimiter] = token;
-                token = _strtok_r(NULL, delimiter, &save_ptr);
-                num_delimiter++;
-        }
+	user_input_copy = malloc(sizeof(char) * fd_check);
+	if (user_input_copy == NULL)
+	{
+		perror("Error: cannot allocate memory");
+		return (NULL);
+	}
+	/* add null byte to end */
+	s_copy(user_input_copy, take_user_input);
+	user_input_copy[sizeof(char) * fd_check - 1] = '\0';
+	parse_token = strtok(take_user_input, delimiter);
 
-        av = realloc(av, sizeof(*av) * (num_delimiter + 1));
-        av[num_delimiter] = NULL;
+	while (parse_token != NULL)
+	{
+		token_count++;
+		parse_token = strtok(NULL, delimiter);
+	}
+	token_count++;
 
-        return (av);
+	argv = malloc(sizeof(char *) * token_count);
+	parse_token = strtok(user_input_copy, delimiter);
+	for (num = 0; parse_token != NULL; num++)
+	{
+		argv[num] = malloc(sizeof(char) * s_len(parse_token) + 1);
+		s_copy(argv[num], parse_token);
+		parse_token = strtok(NULL, delimiter);
+	}
+	argv[num] = NULL;
+	return (argv);
 }
