@@ -9,16 +9,17 @@
 
 void (*get_command(char *cmd))(void)
 {
-	if (!cmd || !*cmd)
+	if (! (cmd && *cmd))
 		return (NULL);
 
 	/* Check if cmd is "exit" */
 	if (strcmp(cmd, "exit") == 0)
 	{
 		/* Return function pointer to exit_program */
-		_exit(0);	
+		 _exit(0);	
 	}
 
 	/* If cmd is not "exit", return NULL */
 	return (NULL);
 }
+
