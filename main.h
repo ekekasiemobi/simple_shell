@@ -15,6 +15,8 @@
 #include <limits.h>
 #include <sys/wait.h>
 
+
+ int main(int ac, char **argv)
  char *prompt_read(ssize_t *fd_check);
 
 #endif
