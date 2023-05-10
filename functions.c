@@ -37,3 +37,45 @@ int determine_command_type(char *command)
 
         return (INVALID_COMMAND);
 }
+
+/**
+ * initializer - executes a command based on it's type
+ * @tokenized_cmd: tokenized form of the command (ls -l == {ls, -l, NULL})
+ * @cmd_type: type of the command
+ *
+ * Return: void
+ */
+void initializer(char **tokenized_cmd, int cmd_type)
+{
+        void (*func)(char **cmd);
+
+        if (cmd_type == EXT_COMMAND)
+        {
+                if (execve(tokenized_cmd[0], tokenized_cmd, NULL) == -1)
+                {
+                        perror(_getenv("PWD"));
+                        exit(2);
+                }
+        }
+        if (cmd_type == PATH_COMMAND)
+        {
+                if (execve(find_path(tokenized_cmd[0]), tokenized_cmd, NULL) == -1)
+                {
+                        perror(_getenv("PWD"));
+                        exit(2);
+                }
+        }
+        if (cmd_type == INT_COMMAND)
+        {
+                func = get_func(tokenized_cmd[0]);
+                func(tokenized_cmd);
+        }
+        if (cmd_type == INVALID_COMMAND)
+        {
+                print(shell_name, STDERR_FILENO);
+                print(": 1: ", STDERR_FILENO);
+                print(tokenized_cmd[0], STDERR_FILENO);
+                print(": not found\n", STDERR_FILENO);
+                status = 127;
+        }
+}

@@ -19,6 +19,7 @@
 int main(int ac, char **argv)
 char *prompt_read(ssize_t *fd_check);
 int determine_command_type(char *command);
+void initializer(char **tokenized_cmd, int cmd_type);
 
 
 #endif
