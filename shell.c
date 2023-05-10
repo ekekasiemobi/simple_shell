@@ -8,20 +8,14 @@
  */
 
 
-int main(int argc __attribute__((unused)), char **argv)
+int main(int ac, char **argv)
 {
-	char **current_cmd = NULL;
-        int i, cmd_type = 0;
-        size_t n = 0;
-
 	char *user_input;
 	ssize_t fd_check;
+	char **receive_argv;
 	char **args;
 	(void)ac;
 	(void)argv;
-
-	 signal(SIGINT, SIG_IGN);
-         shell_name = argv[0];
 
 	args = malloc(sizeof(char *) * 10);
 	/* TODO: you'll need a way to create a dynamic array */
@@ -34,19 +28,18 @@ int main(int argc __attribute__((unused)), char **argv)
 		fd_check = 0;
 
 		user_input = prompt_read(&fd_check);
-		cmds = tokenizer(line, ";");
-                for (i = 0; cmds[i] != NULL; i++)
-                {
-                        current_cmd = tokenizer(cmds[i], " ");
-                        if (current_cmd[0] == NULL)
-                        {
-                                free(current_cmd);
-                                break;
-                        }
-                        cmd_type = determine_command_type(current_cmd[0]);
-			initializer(current_cmd, cmd_type);
-                        free(current_cmd);
-		 }
-                free(cmds);
+		/* parse user's command */
+		receive_argv = parse_user_input(user_input, args, fd_check);
+		/* execute user's command */
+
+		command = get_command(receive_argv[0]);
+		if (command != NULL)
+		{
+			(*command)();
+			continue;
+		}
+		execute_command(receive_argv);
+		fflush(stdout);
 	}
 }
+
