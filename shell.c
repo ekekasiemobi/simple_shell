@@ -8,7 +8,7 @@
  */
 
 
-int main(int ac, char **argv)
+int main(int argc __attribute__((unused)), char **argv)
 {
 	char **current_cmd = NULL;
         int i, cmd_type = 0;
