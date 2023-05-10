@@ -9,9 +9,12 @@
  */
 int s_len(char *string)
 {
-	int num = 0;
+	int i;
+	int num;
 
-	while (*string++)
+	num = 0;
+
+	for (i = 0; string[i] != '\0'; i++)
 		num++;
 
 	return (num);
@@ -26,8 +29,10 @@ int s_len(char *string)
  */
 void s_copy(char *to, char *from)
 {
-	while ((*to++ = *from++))
-		;
+	int i;
+
+	for (i = 0; from[i] != '\0'; i++)
+		to[i] = from[i];
 }
 
 
@@ -39,8 +44,15 @@ void s_copy(char *to, char *from)
  */
 void s_cat(char *text_add, char *text)
 {
-	while (*text_add)
-                text_add++;
-        while ((*text_add++ = *text++))
-                ;
+	int i;
+	int num;
+
+	i = 0;
+	num = 0;
+	while (text_add[i] != '\0')
+		i++;
+	for (num = 0; text[num] != '\0'; num++)
+		text_add[i++] = text[num];
+	text_add[i] = '\0';
 }
+
