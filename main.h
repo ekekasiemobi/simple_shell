@@ -20,6 +20,9 @@ int main(int argc __attribute__((unused)), char **argv);
 char *prompt_read(ssize_t *fd_check);
 int determine_command_type(char *command);
 void initializer(char **tokenized_cmd, int cmd_type);
+void s_cat(char *text_add, char *text);
+void s_copy(char *to, char *from);
+int s_len(char *string);
 
 
 #endif
