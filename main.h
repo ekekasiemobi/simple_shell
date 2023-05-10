@@ -16,10 +16,10 @@
 #include <sys/wait.h>
 
 
-int main(int ac, char **argv)
-char *prompt_read(ssize_t *fd_check);
-int determine_command_type(char *command);
-void initializer(char **tokenized_cmd, int cmd_type);
+int main(int ac, char **)
+char *prompt_read(ssize_t *);
+int determine_command_type(char *);
+void initializer(char **, int);
 
 
 #endif
