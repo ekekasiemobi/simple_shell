@@ -14,6 +14,10 @@
 #include <limits.h>
 #include <sys/wait.h>
 
+
+#define MAX_ARGS 10
+
+
 char *get_path(char *first_command);
 
 typedef int (*command_func)(void);
