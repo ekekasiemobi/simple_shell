@@ -54,5 +54,10 @@ void print_error(char **av, char *err);
 int _errputs(char *str);
 void print_error(char **av, char *err);
 
+
+char *_strchr(char *s, char c);
+int _strcspn(char *s, char *charset);
+int _strcmp(char *s, char *c);
+
 #endif
 
