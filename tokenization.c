@@ -9,12 +9,12 @@
  * Return: array of pointer to strings
  */
 
-char **parse_user_input(char *take_user_input, ssize_t fd_check)
+char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
 {
-	char **argv = malloc(sizeof(char *) * 10);
 	char *user_input_copy, *parse_token;
 	const char *delimiter;
 	int token_count = 0, num = 0;
+	int token_length;
 
 	delimiter = " \n";
 
@@ -36,15 +36,17 @@ char **parse_user_input(char *take_user_input, ssize_t fd_check)
 	}
 	token_count++;
 
+
 	argv = malloc(sizeof(char *) * token_count);
 	parse_token = strtok(user_input_copy, delimiter);
 	for (num = 0; parse_token != NULL; num++)
 	{
-		argv[num] = malloc(sizeof(char) * s_len(parse_token) + 1);
+		token_length = s_len(parse_token);
+		argv[num] = malloc(sizeof(char) * token_length + 1);
+		argv[num][token_length] = '\0';
 		s_copy(argv[num], parse_token);
 		parse_token = strtok(NULL, delimiter);
 	}
 	argv[num] = NULL;
 	return (argv);
 }
-
