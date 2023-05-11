@@ -24,7 +24,7 @@ void execute_command(char **receive_argv)
 
 		if (child_process == -1)
 		{
-			print_error(receive_argv, "No such file or directory\n");
+			print_error(receive_argv, "command not found\n");
 			exit(EXIT_FAILURE);
 		}
 		else if (child_process == 0)
@@ -34,7 +34,7 @@ void execute_command(char **receive_argv)
 
 			if (execve(final_cmd, receive_argv, NULL) == -1)
 			{
-				print_error(receive_argv, "No such file or directory\n");
+				print_error(receive_argv, "command not found\n");
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -42,7 +42,7 @@ void execute_command(char **receive_argv)
 		{
 			if (waitpid(child_process, &process_status, 0) == -1)
 			{
-				print_error(receive_argv, "No such file or directory\n");
+				print_error(receive_argv, "command not found\n");
 				exit(EXIT_FAILURE);
 			}
 		}
