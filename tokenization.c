@@ -9,8 +9,9 @@
  * Return: array of pointer to strings
  */
 
-char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
+char **parse_user_input(char *take_user_input, ssize_t fd_check)
 {
+	char **argv = malloc(sizeof(char *) * 10);
 	char *user_input_copy, *parse_token;
 	const char *delimiter;
 	int token_count = 0, num = 0;
