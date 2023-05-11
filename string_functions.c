@@ -56,3 +56,4 @@ void s_cat(char *text_add, char *text)
 	text_add[i] = '\0';
 }
 
+

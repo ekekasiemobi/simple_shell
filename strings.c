@@ -1,4 +1,30 @@
-#include "main.h"i
+#include "main.h"
+
+/**
+ * _strchr - locates a char in a string
+ * @s: string to be searched
+ * @c: char to be checked
+ *
+ * Return: pointer to the first occurrence of `c` in `s`
+ */
+  char *_strchr(char *s, char c)
+  {
+          int i = 0;
+ 
+          for (; s[i] != c && s[i] != '\0'; i++)
+                  ;
+          if (s[i] == c)
+          {
+                  return (s + i);
+          }
+          else
+          {
+                  return (NULL);
+         }
+ 	       return (0);
+  }
+
+
 
 /**
  * _strcspn - computes segment of str 
@@ -22,29 +48,6 @@ int _strcspn(char *s, char *charset)
         return (count);
 }
 
-/**
- * _strchr - locates a char in a string
- * @s: string to be searched
- * @c: char to be checked
- *
- * Return: pointer to the first occurrence of `c` in `s`
- */
-char *_strchr(char *s, char c)
-{
-        int i = 0;
-
-        for (; s[i] != c && s[i] != '\0'; i++)
-                ;
-        if (s[i] == c)
-	{
-                return (s + i);
-	}
-        else				
-	{
-                return (NULL);
-	}
-	return (0);
-}
 
 /**
   * _strcmp - compares two strings
