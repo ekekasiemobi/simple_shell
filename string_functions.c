@@ -33,6 +33,8 @@ void s_copy(char *to, char *from)
 
 	for (i = 0; from[i] != '\0'; i++)
 		to[i] = from[i];
+
+	to[i] = '\0';
 }
 
 
