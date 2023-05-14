@@ -48,6 +48,7 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 		parse_token = strtok(NULL, delimiter);
 	}
 	argv[num] = NULL;
+	free(user_input_copy);
 	return (argv);
 }
 

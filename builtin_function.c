@@ -20,7 +20,7 @@ void exit_shell(char **tokenized_command)
 
     if (num_token == 1)
     {
-        free(tokenized_command);
+        free_array(tokenized_command);
         free(line);
         free(cmds);
         exit(status);

@@ -12,11 +12,12 @@ int main(int ac, char **argv)
     char *user_input;
     ssize_t fd_check;
     char **receive_argv;
-    char **args;
+    char **args = NULL;
+	int i;
     (void)ac;
     (void)argv;
 
-    args = malloc(sizeof(char *) * 10);
+
     /* TODO: you'll need a way to create a dynamic array */
 
     while (1)
@@ -30,20 +31,32 @@ int main(int ac, char **argv)
 
         if (strcmp(receive_argv[0], "exit") == 0)
         {
+		free(user_input);
             exit_shell(receive_argv);
             continue;
         }
 
-        execute_command(receive_argv);
+       i = execute_command(receive_argv);
         fflush(stdout);
+	if (i == 1)
+		 print_error(receive_argv, "command not found\n");		
+	free(user_input);
+
+        free_array(receive_argv);
+
     }
-	free_array(receive_argv);
-	free(receive_argv);
 	
 }
 
 void free_array(char **argv)
 {
-	for (; *argv != NULL; argv++)
-		free(*argv);
+	char **temp = argv;
+
+
+	for (; *temp != NULL; temp++)
+	{
+		free(*temp);
+		*temp = NULL;
+	}
+	free(argv);
 }

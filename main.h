@@ -35,7 +35,7 @@ typedef struct {
 } command_t;
 
 char *prompt_read(ssize_t *fd_check);
-void execute_command(char **receive_argv);
+int execute_command(char **receive_argv);
 char **tokenization(char *take_user_input, char **argv, ssize_t fd_check);
 
 char *accept_user_input(void);

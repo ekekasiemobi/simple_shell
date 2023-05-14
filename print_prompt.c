@@ -19,14 +19,22 @@ char *prompt_read(ssize_t *fd_check)
 	}
 
 	*fd_check = getline(&user_input, &byte_size, stdin);
+	if (*fd_check == 1)
+	{
+		free(user_input);
+		*fd_check = 0;
+		prompt_read(fd_check);
+	}
 
 	if (*fd_check == -1 && isatty(STDIN_FILENO))
         {
                 write(STDOUT_FILENO, "\n", 1);
+		free(user_input);
                 exit(EXIT_SUCCESS);
         }
         else if (*fd_check == -1)
         {
+		free(user_input);
                 exit(EXIT_SUCCESS);
         }
 
