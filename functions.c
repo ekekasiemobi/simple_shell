@@ -12,7 +12,7 @@ int _errputs(char *str)
 }
 void print_error(char **av, char *err)
 {
-        _errputs(getenv("_"));
+        _errputs(_getenv("_"));
         _errputs(": 1: ");
         _errputs(av[0]);
         _errputs(": ");
