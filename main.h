@@ -68,4 +68,8 @@ int determine_command_type(char *command);
 int _atoi(char *s);
 
 void free_array(char **argv);
+char *_strdup(char *str);
+char *_strtok(char *str, const char *delim);
+char *_getenv(const char *name);
+
 #endif
