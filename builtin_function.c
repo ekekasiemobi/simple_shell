@@ -1,25 +1,50 @@
 #include "main.h"
+
 /**
- * get_command - returns a function poiner
+ * exit_shell - exits shell
+ * @tokenized_command: command entered
  *
- * @cmd: the command to be evaluated
- *
- * Return: a function pointer corresponding to the input command
+ * Return: void
  */
-
-void (*get_command(char *cmd))(void)
+void exit_shell(char **tokenized_command)
 {
-	if (! (cmd && *cmd))
-		return (NULL);
+    char *shell_name = NULL;
+    char *line = NULL;
+    char **cmds = NULL;
+    int status = 0;
+    int num_token = 0, arg;
+    const char *error_message = "$: too many arguments\n";
 
-	/* Check if cmd is "exit" */
-	if (strcmp(cmd, "exit") == 0)
-	{
-		/* Return function pointer to exit_program */
-		 _exit(0);	
-	}
+    for (; tokenized_command[num_token] != NULL; num_token++)
+        ;
 
-	/* If cmd is not "exit", return NULL */
-	return (NULL);
+    if (num_token == 1)
+    {
+        free_array(tokenized_command);
+        free(line);
+        free(cmds);
+        exit(status);
+    }
+    else if (num_token == 2)
+    {
+        arg = _atoi(tokenized_command[1]);
+
+        if (arg == -1)
+        {
+            write(STDERR_FILENO, shell_name, strlen(shell_name));
+            write(STDERR_FILENO, ": 1: exit: error ", strlen(": 1: exit: error "));
+            write(STDERR_FILENO, tokenized_command[1], strlen(tokenized_command[1]));
+            write(STDERR_FILENO, "\n", 1);
+            status = 2;
+        }
+        else
+        {
+            free(line);
+            free(tokenized_command);
+            free(cmds);
+            exit(arg);
+        }
+    }
+    else
+        write(STDERR_FILENO, error_message, strlen(error_message));
 }
-
