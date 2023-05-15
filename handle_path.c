@@ -17,13 +17,13 @@ char *get_path(char *first_command)
 	    i;
 
 	delimiter = ":";
-	cmd_path = getenv("PATH");
+	cmd_path = "/bin:";_getenv("PATH");
 
 	if (cmd_path)
 	{
-		cmd_path_copy = strdup(cmd_path);
+		cmd_path_copy = _strdup(cmd_path);
 		length_user_command = s_len(first_command);
-		parse_token = strtok(cmd_path_copy, delimiter);
+		parse_token = _strtok(cmd_path_copy, delimiter);
 
 		while (parse_token != NULL)
 		{
@@ -45,7 +45,7 @@ char *get_path(char *first_command)
 				return (path_to_file);
 			}
 			free(path_to_file);
-			parse_token = strtok(NULL, delimiter);
+			parse_token = _strtok(NULL, delimiter);
 		}
 	}
 	free(cmd_path_copy);
