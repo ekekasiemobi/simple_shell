@@ -7,7 +7,7 @@
  */
 
 
-void execute_command(char **receive_argv)
+int execute_command(char **receive_argv)
 {
 	char *first_command;
 	char *final_cmd;
@@ -17,25 +17,25 @@ void execute_command(char **receive_argv)
 	first_command = NULL;
 	final_cmd = NULL;
 	child_process = -1;
+	 first_command = receive_argv[0];
+ 	final_cmd = get_path(first_command);
 
-	if (receive_argv)
+	if (receive_argv && access(final_cmd, X_OK) != -1)
 	{
 		child_process = fork();
 
 		if (child_process == -1)
 		{
 			print_error(receive_argv, "command not found\n");
-			exit(EXIT_FAILURE);
+			/*exit(EXIT_FAILURE);*/
 		}
 		else if (child_process == 0)
 		{
-			first_command = receive_argv[0];
-			final_cmd = get_path(first_command);
 
 			if (execve(final_cmd, receive_argv, NULL) == -1)
 			{
 				print_error(receive_argv, "command not found\n");
-				exit(EXIT_FAILURE);
+				/*exit(EXIT_FAILURE);*/
 			}
 		}
 		else
@@ -43,10 +43,10 @@ void execute_command(char **receive_argv)
 			if (waitpid(child_process, &process_status, 0) == -1)
 			{
 				print_error(receive_argv, "command not found\n");
-				exit(EXIT_FAILURE);
+				/*exit(EXIT_FAILURE);*/
 			}
 		}
+		return (0);
 	}
+	return (1);
 }
-
-
