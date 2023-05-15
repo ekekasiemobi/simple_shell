@@ -65,8 +65,7 @@ int _strcmp(char *s, char *c);
 void exit_shell(char **tokenized_command);
 void execute_cmd(char **command, int command_type);
 int determine_command_type(char *command);
- int _atoi(char *s);
+int _atoi(char *s);
 
- void free_array(char **argv);
+void free_array(char **argv);
 #endif
-
