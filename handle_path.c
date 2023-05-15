@@ -53,6 +53,3 @@ char *get_path(char *first_command)
 		return (first_command);
 	return (NULL);
 }
-
-
-
