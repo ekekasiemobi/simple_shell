@@ -9,7 +9,7 @@
  * Return: array of pointer to strings
  */
 
-char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
+char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 {
 	char *user_input_copy, *parse_token;
 	const char *delimiter;
@@ -26,7 +26,7 @@ char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
 	}
 	/* add null byte to end */
 	s_copy(user_input_copy, take_user_input);
-	user_input_copy[sizeof(char) * fd_check - 1] = '\0';
+	
 	parse_token = strtok(take_user_input, delimiter);
 
 	while (parse_token != NULL)
@@ -48,5 +48,8 @@ char **parse_user_input(char *take_user_input, char **argv, ssize_t fd_check)
 		parse_token = strtok(NULL, delimiter);
 	}
 	argv[num] = NULL;
+	free(user_input_copy);
 	return (argv);
 }
+
+
