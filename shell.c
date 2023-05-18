@@ -14,8 +14,12 @@ int main(int ac, char **argv)
     char **receive_argv;
     char **args = NULL;
 	int i;
-    (void)ac;
-    (void)argv;
+
+	data_shell datash;
+	 extern char **environ; 
+    datash._environ = environ;
+	 (void)ac;
+     (void)argv;
 
 
     /* TODO: you'll need a way to create a dynamic array */
@@ -35,6 +39,12 @@ int main(int ac, char **argv)
             exit_shell(receive_argv);
             continue;
         }
+	if (strcmp(receive_argv[0], "env") == 0)
+        {
+            _env(&datash);
+            continue;
+     }
+
 
        i = execute_command(receive_argv);
         fflush(stdout);

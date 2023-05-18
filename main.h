@@ -19,11 +19,13 @@
 
 #define MAX_ARGS 10
 
-/* constants for commands */
-#define EXT_COMMAND 1 /* external */
-#define INT_COMMAND 2 /* internal */
-#define PATH_COMMAND 3
-#define INVALID_COMMAND -1
+
+typedef struct data_shell {
+    char **_environ;
+    int status;
+} data_shell;
+int _env(data_shell *datash);
+
 
 char *get_path(char *first_command);
 
@@ -41,7 +43,6 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check);
 char *accept_user_input(void);
 
 int main(int ac, char **argv);
-typedef struct data_shell data_shell;
 void (*get_command(char *cmd))(void);
 
 /* strings related */
@@ -68,5 +69,12 @@ int determine_command_type(char *command);
  int _atoi(char *s);
 
  void free_array(char **argv);
+
+typedef struct {
+    char** argv;
+} info_t;
+int _mycd(info_t* info);
+ char *_getenv(const char *name);
+
 #endif
 
