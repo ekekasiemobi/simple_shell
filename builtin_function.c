@@ -29,7 +29,7 @@ void exit_shell(char **tokenized_command)
 		else if (num_token == 2)
 		{
 			arg = _atoi(tokenized_command[1]);
-		
+
 
 			if (arg == -1)
 			{
