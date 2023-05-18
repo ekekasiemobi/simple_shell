@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "main.h"
 /**
  * main - shell clone
@@ -13,10 +12,14 @@ int main(int ac, char **argv)
 	char **receive_argv;
 	int i;
 	int execution_status;
+	data_shell datash;
+	extern char **environ;
+
+	datash._environ = environ;
 	(void)ac;
 	(void)argv;
 
-	while (1)
+	while (1 == 1)
 	{
 		user_input = NULL;
 		fd_check = 0;
@@ -30,6 +33,11 @@ int main(int ac, char **argv)
 		if (strcmp(receive_argv[0], "exit") == 0)
 		{			free(user_input);
 			exit_shell(receive_argv);
+			continue;
+		}
+		if (strcmp(receive_argv[0], "env") == 0)
+		{
+			_env(&datash);
 			continue;
 		}
 		i = handle_env_commands(receive_argv);
