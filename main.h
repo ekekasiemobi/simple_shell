@@ -24,14 +24,21 @@
 #define INT_COMMAND 2 /* internal */
 #define PATH_COMMAND 3
 #define INVALID_COMMAND -1
+#define BUFFER_SIZE 1024
 
 char *get_path(char *first_command);
 
 typedef int (*command_func)(void);
 
-typedef struct {
-    char *name;
-    int (*func)(void);
+/**
+ * struct command_s - Structure for command information
+ * @name: The name of the command
+ * @func: Pointer to the function implementing the command
+ */
+typedef struct command_s
+{
+	char *name;
+	int (*func)(void);
 } command_t;
 
 char *prompt_read(ssize_t *fd_check);
@@ -71,5 +78,10 @@ void free_array(char **argv);
 char *_strdup(char *str);
 char *_strtok(char *str, const char *delim);
 char *_getenv(const char *name);
+
+int shell_setenv(char **args);
+int shell_unsetenv(char **args);
+int handle_env_commands(char **args);
+char *_getline(void);
 
 #endif
