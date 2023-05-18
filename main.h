@@ -19,37 +19,21 @@
 
 #define MAX_ARGS 10
 
-/* constants for commands */
-#define EXT_COMMAND 1 /* external */
-#define INT_COMMAND 2 /* internal */
-#define PATH_COMMAND 3
-#define INVALID_COMMAND -1
-#define BUFFER_SIZE 1024
+typedef struct data_shell
+{
+char **_environ;
+int status;
+} data_shell;
+int _env(data_shell *datash);
 
 char *get_path(char *first_command);
-
-typedef int (*command_func)(void);
-
-/**
- * struct command_s - Structure for command information
- * @name: The name of the command
- * @func: Pointer to the function implementing the command
- */
-typedef struct command_s
-{
-	char *name;
-	int (*func)(void);
-} command_t;
 
 char *prompt_read(ssize_t *fd_check);
 int execute_command(char **receive_argv);
 char **tokenization(char *take_user_input, char **argv, ssize_t fd_check);
 
 char *accept_user_input(void);
-
 int main(int ac, char **argv);
-typedef struct data_shell data_shell;
-void (*get_command(char *cmd))(void);
 
 /* strings related */
 int s_len(char *string);
