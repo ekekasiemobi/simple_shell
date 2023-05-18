@@ -33,7 +33,12 @@ int execute_command(char **receive_argv);
 char **tokenization(char *take_user_input, char **argv, ssize_t fd_check);
 
 char *accept_user_input(void);
+/* shell.c functions */
 int main(int ac, char **argv);
+void process_input(data_shell *datash);
+char **parse_input(char *input, ssize_t *fd_check);
+void execute(char **receive_argv);
+extern char **environ;
 
 /* strings related */
 int s_len(char *string);
