@@ -45,6 +45,5 @@ char *prompt_read(ssize_t *fd_check)
 
 	/*write(STDOUT_FILENO, user_input, byte_size);*/
 	user_input[_strcspn(user_input, "\n")] = '\0';
-
 	return (user_input);
 }
