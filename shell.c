@@ -36,7 +36,7 @@ int main(int ac, char **argv)
 			continue;
 		}
 		if (strcmp(receive_argv[0], "env") == 0)
-		{
+		{			free(user_input);
 			_env(&datash);
 			continue;
 		}
