@@ -8,7 +8,6 @@
 
 char *prompt_read(ssize_t *fd_check)
 {
-	size_t byte_size = 0; /* assigned value to it */
 	char *display_prompt = "$ ";
 	char *user_input = NULL;
 
@@ -18,25 +17,31 @@ char *prompt_read(ssize_t *fd_check)
 		write(STDOUT_FILENO, display_prompt, 2);
 	}
 
-	*fd_check = getline(&user_input, &byte_size, stdin);
-	if (*fd_check == 1)
+	user_input = _getline();
+	if (user_input == NULL)
 	{
-		free(user_input);
-		*fd_check = 0;
-		prompt_read(fd_check);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
+		exit(EXIT_SUCCESS);
 	}
+	*fd_check = strlen(user_input);
 
 	if (*fd_check == -1 && isatty(STDIN_FILENO))
-        {
-                write(STDOUT_FILENO, "\n", 1);
+	{
+		write(STDOUT_FILENO, "\n", 1);
 		free(user_input);
-                exit(EXIT_SUCCESS);
-        }
-        else if (*fd_check == -1)
-        {
+		exit(EXIT_SUCCESS);
+	}
+	else if (*fd_check == -1)
+	{
 		free(user_input);
-                exit(EXIT_SUCCESS);
-        }
+		exit(EXIT_SUCCESS);
+	}
+	if (*fd_check == 0 && isatty(STDIN_FILENO))
+	{
+		free(user_input);
+		return (prompt_read(fd_check));
+	}
 
 	/*write(STDOUT_FILENO, user_input, byte_size);*/
 	user_input[_strcspn(user_input, "\n")] = '\0';

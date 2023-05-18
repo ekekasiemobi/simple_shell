@@ -16,7 +16,7 @@
 #include <limits.h>
 #include <sys/wait.h>
 
-
+#define BUFFER_SIZE 1024
 #define MAX_ARGS 10
 
 typedef struct data_shell
