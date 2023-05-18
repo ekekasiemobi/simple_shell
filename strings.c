@@ -89,4 +89,3 @@ int _strcmp(char *s, char *c)
 
     return (1);
 }
-
