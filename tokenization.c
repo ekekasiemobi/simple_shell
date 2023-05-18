@@ -2,7 +2,7 @@
 
 
 /**
- * parse_user_input - split user's command strings
+ * tokenization - split user's command strings
  * @take_user_input: pointer to user_input
  * @argv: array of pointer to strings
  * @fd_check: size of input read in bytes
@@ -26,7 +26,7 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 	}
 	/* add null byte to end */
 	s_copy(user_input_copy, take_user_input);
-	
+
 	parse_token = _strtok(take_user_input, delimiter);
 
 	while (parse_token != NULL)
@@ -48,6 +48,5 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 		parse_token = _strtok(NULL, delimiter);
 	}
 	argv[num] = NULL;
-	free(user_input_copy);
 	return (argv);
 }
