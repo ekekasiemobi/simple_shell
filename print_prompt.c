@@ -27,8 +27,8 @@ char *prompt_read(ssize_t *fd_check)
 	}
 
 	if (*fd_check == -1 && isatty(STDIN_FILENO))
-        {
-                write(STDOUT_FILENO, "\n", 1);
+	{
+		write(STDOUT_FILENO, "\n", 1);
 		free(user_input);
                 exit(EXIT_SUCCESS);
         }
