@@ -16,14 +16,22 @@
 #include <limits.h>
 #include <sys/wait.h>
 
-
 #define MAX_ARGS 10
+#define BUFFER_SIZE 1024
 
+extern char **environ;
+char *_getline(void);
+void handle_exit(char *user_input, char **receive_argv);
+
+int shell_setenv(char **args);
+int shell_unsetenv(char **args);
+int handle_env_commands(char **args);
 
 typedef struct data_shell {
     char **_environ;
     int status;
 } data_shell;
+void execute_shell(void *datash, char **receive_argv);
 int _env(data_shell *datash);
 
 

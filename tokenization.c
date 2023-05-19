@@ -26,7 +26,7 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 	}
 	/* add null byte to end */
 	s_copy(user_input_copy, take_user_input);
-	
+
 	parse_token = strtok(take_user_input, delimiter);
 
 	while (parse_token != NULL)

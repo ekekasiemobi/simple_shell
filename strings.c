@@ -8,19 +8,28 @@
  */
 int _atoi(char *s)
 {
-        unsigned int n = 0;
+	unsigned int n = 0;
 
-        do {
-                if (*s == '-')
-                        return (-1);
-                else if ((*s < '0' || *s > '9') && *s != '\0')
-                        return (-1);
-                else if (*s >= '0'  && *s <= '9')
-                        n = (n * 10) + (*s - '0');
-                else if (n > 0)
-                        break;
-        } while (*s++);
-        return (n);
+	do {
+		if (*s == '-')
+		{
+			return (-1);
+		}
+		else if ((*s < '0' || *s > '9') && *s != '\0')
+		{
+			return (-1);
+		}
+		else if (*s >= '0'  && *s <= '9')
+		{
+			n = (n * 10) + (*s - '0');
+		}
+		else if (n > 0)
+		{
+			break;
+		}
+	} while (*s++);
+
+	return (n);
 }
 
 /**
@@ -32,19 +41,19 @@ int _atoi(char *s)
  */
 char *_strchr(char *s, char c)
 {
-    int i = 0;
+	int i = 0;
 
-    for (; s[i] != c && s[i] != '\0'; i++)
-        ;
+	for (; s[i] != c && s[i] != '\0'; i++)
+		;
 
-    if (s[i] == c)
-    {
-        return (s + i);
-    }
-    else
-    {
-        return (NULL);
-    }
+	if (s[i] == c)
+	{
+		return (s + i);
+	}
+	else
+	{
+		return (NULL);
+	}
 }
 
 /**
@@ -56,18 +65,18 @@ char *_strchr(char *s, char c)
  */
 int _strcspn(char *s, char *charset)
 {
-    int count = 0, i;
+	int count = 0, i;
 
-    for (i = 0; s[i] != '\0'; i++)
-    {
-        if (_strchr(charset, s[i]) != NULL)
-        {
-            break;
-        }
-        count++;
-    }
+	for (i = 0; s[i] != '\0'; i++)
+	{
+		if (_strchr(charset, s[i]) != NULL)
+		{
+			break;
+		}
+		count++;
+	}
 
-    return (count);
+	return (count);
 }
 
 /**
@@ -79,14 +88,15 @@ int _strcspn(char *s, char *charset)
  */
 int _strcmp(char *s, char *c)
 {
-    int i;
+	int i;
 
-    for (i = 0; s[i] && c[i]; i++)
-    {
-        if (s[i] != c[i])
-            return (0);
-    }
+	for (i = 0; s[i] && c[i]; i++)
+	{
+		if (s[i] != c[i])
+		{
+			return (0);
+		}
+	}
 
-    return (1);
+	return (1);
 }
-

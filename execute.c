@@ -17,8 +17,8 @@ int execute_command(char **receive_argv)
 	first_command = NULL;
 	final_cmd = NULL;
 	child_process = -1;
-	 first_command = receive_argv[0];
- 	final_cmd = get_path(first_command);
+	first_command = receive_argv[0];
+	final_cmd = get_path(first_command);
 
 	if (receive_argv && access(final_cmd, X_OK) != -1)
 	{
@@ -50,5 +50,4 @@ int execute_command(char **receive_argv)
 	}
 	return (1);
 }
-
 

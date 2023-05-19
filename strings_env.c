@@ -79,11 +79,10 @@ char *_strtok(char *str, const char *delim)
  * _getenv - searches the environment list to find the environment variable
  * @name: name of the variable to find
  *
- * Return: pointer to the value of the environment variable, or NULL if not found.
+ * Return: pointer to the value of the environment variable
  */
 char *_getenv(const char *name)
 {
-	extern char **environ;
 	int i, j, len;
 
 	if (name == NULL)

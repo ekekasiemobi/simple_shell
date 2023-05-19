@@ -1,20 +1,14 @@
 #include "main.h"
-
 /**
  * get_path - get the path of each command
  * @first_command: user input
  * Return: command path
  */
-
 char *get_path(char *first_command)
 {
 	struct stat path_test;
-	char *cmd_path, *cmd_path_copy, *delimiter;
-	char *parse_token, *path_to_file;
-	int dir_len,
-	    length_user_command,
-	    path_to_file_len,
-	    i;
+	char *cmd_path, *cmd_path_copy, *delimiter,  *path_to_file, *parse_token;
+	int dir_len, length_user_command, path_to_file_len, i;
 
 	delimiter = ":";
 	cmd_path = getenv("PATH");
@@ -29,7 +23,6 @@ char *get_path(char *first_command)
 		{
 			dir_len = s_len(parse_token);
 			path_to_file_len = length_user_command + dir_len + 2;
-			/* added ↑ */
 			path_to_file = malloc(path_to_file_len);
 			path_to_file[0] = '\0';
 			for (i = 0; i < path_to_file_len; i++)
@@ -53,5 +46,3 @@ char *get_path(char *first_command)
 		return (first_command);
 	return (NULL);
 }
-
-
