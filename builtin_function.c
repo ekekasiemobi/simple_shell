@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * exit_shell - exits shell
  * @tokenized_command: command entered
@@ -29,8 +28,6 @@ void exit_shell(char **tokenized_command)
 		else if (num_token == 2)
 		{
 			arg = _atoi(tokenized_command[1]);
-
-
 			if (arg == -1)
 			{
 				write(STDERR_FILENO, shell_name, strlen(shell_name));
@@ -50,4 +47,16 @@ void exit_shell(char **tokenized_command)
 		else
 		write(STDERR_FILENO, error_message, strlen(error_message));
 	}
+}
+
+
+/**
+ * handle_exit - Handle 'exit' command
+ * @user_input: User input string
+ * @receive_argv: Array of command arguments
+ */
+void handle_exit(char *user_input, char **receive_argv)
+{
+	free(user_input);
+	exit_shell(receive_argv);
 }
