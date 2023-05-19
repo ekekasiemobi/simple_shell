@@ -16,29 +16,42 @@
 #include <limits.h>
 #include <sys/wait.h>
 
-#define BUFFER_SIZE 1024
 #define MAX_ARGS 10
+#define BUFFER_SIZE 1024
 
-typedef struct data_shell
-{
-char **_environ;
-int status;
+extern char **environ;
+char *_getline(void);
+void handle_exit(char *user_input, char **receive_argv);
+
+int shell_setenv(char **args);
+int shell_unsetenv(char **args);
+int handle_env_commands(char **args);
+
+typedef struct data_shell {
+    char **_environ;
+    int status;
 } data_shell;
+void execute_shell(void *datash, char **receive_argv);
 int _env(data_shell *datash);
 
+
 char *get_path(char *first_command);
+
+typedef int (*command_func)(void);
+
+typedef struct {
+    char *name;
+    int (*func)(void);
+} command_t;
 
 char *prompt_read(ssize_t *fd_check);
 int execute_command(char **receive_argv);
 char **tokenization(char *take_user_input, char **argv, ssize_t fd_check);
 
 char *accept_user_input(void);
-/* shell.c functions */
+
 int main(int ac, char **argv);
-void process_input(data_shell *datash);
-char **parse_input(char *input, ssize_t *fd_check);
-void execute(char **receive_argv);
-extern char **environ;
+void (*get_command(char *cmd))(void);
 
 /* strings related */
 int s_len(char *string);
@@ -61,16 +74,15 @@ int _strcmp(char *s, char *c);
 void exit_shell(char **tokenized_command);
 void execute_cmd(char **command, int command_type);
 int determine_command_type(char *command);
-int _atoi(char *s);
+ int _atoi(char *s);
 
-void free_array(char **argv);
-char *_strdup(char *str);
-char *_strtok(char *str, const char *delim);
-char *_getenv(const char *name);
+ void free_array(char **argv);
 
-int shell_setenv(char **args);
-int shell_unsetenv(char **args);
-int handle_env_commands(char **args);
-char *_getline(void);
+typedef struct {
+    char** argv;
+} info_t;
+int _mycd(info_t* info);
+ char *_getenv(const char *name);
 
 #endif
+
