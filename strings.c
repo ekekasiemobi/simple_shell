@@ -90,13 +90,13 @@ int _strcmp(char *s, char *c)
 {
 	int i;
 
-	for (i = 0; s[i] && c[i]; i++)
+	for (i = 0; s[i] != '\0' && c[i] != '\0'; i++)
 	{
 		if (s[i] != c[i])
 		{
-			return (0);
+			return (s[i] - c[i]);
 		}
 	}
 
-	return (1);
+	return (s[i] - c[i]);
 }
