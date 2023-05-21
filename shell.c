@@ -24,9 +24,9 @@ int main(int ac, char **argv)
 		receive_argv = tokenization(user_input, receive_argv, fd_check);
 		if (receive_argv[0] == NULL)
 			continue;
-		if (strcmp(receive_argv[0], "exit") == 0)
+		if (_strcmp(receive_argv[0], "exit") == 0)
 			handle_exit(user_input, receive_argv);
-		if (strcmp(receive_argv[0], "env") == 0)
+		if (_strcmp(receive_argv[0], "env") == 0)
 		{
 			free(user_input);
 			_env(&datash);
