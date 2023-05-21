@@ -55,7 +55,7 @@ int handle_env_commands(char **args)
 {
 	char *value;
 
-	if (strcmp(args[0], "setenv") == 0)
+	if (_strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL)
 			return (-1);
@@ -63,7 +63,7 @@ int handle_env_commands(char **args)
 			print_error(args, "Failed to set environment variable\n");
 		return (1);
 	}
-	else if (strcmp(args[0], "unsetenv") == 0)
+	else if (_strcmp(args[0], "unsetenv") == 0)
 	{
 		if (args[1] == NULL)
 		{
@@ -77,7 +77,7 @@ int handle_env_commands(char **args)
 		shell_unsetenv(args);
 		return (1);
 	}
-	else if (strcmp(args[0], "echo") == 0)
+	else if (_strcmp(args[0], "echo") == 0)
 	{
 		if (args[1] == NULL)
 		{	write(STDERR_FILENO, "Usage: echo VARIABLE\n", 21);
