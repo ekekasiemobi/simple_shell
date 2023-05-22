@@ -34,7 +34,8 @@ typedef struct data_shell {
 void execute_shell(void *datash, char **receive_argv);
 int _env(data_shell *datash);
 
-
+char *_strtok(char *str, const char *delim);
+ char *_strdup(char *dup, char *str);
 char *get_path(char *first_command);
 
 typedef int (*command_func)(void);
