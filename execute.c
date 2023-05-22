@@ -1,12 +1,9 @@
 #include "main.h"
-
 /**
  * execute_command - execute user's command
  * @receive_argv: array to pointer of strings
  * Return: nothing
  */
-
-
 int execute_command(char **receive_argv)
 {
 	char *first_command, *final_cmd;
@@ -18,7 +15,7 @@ int execute_command(char **receive_argv)
 	child_process = -1;
 	first_command = receive_argv[0];
 	final_cmd = get_path(first_command);
-	
+
 	if (final_cmd == NULL)
 		return (1);
 
@@ -41,11 +38,9 @@ int execute_command(char **receive_argv)
 		else
 		{
 			if (waitpid(child_process, &process_status, 0) == -1)
-			{
 				print_error(receive_argv, "command not found\n");
-			}
 		}
-		if (_strcmp(final_cmd, first_command) != 0 )
+		if (_strcmp(final_cmd, first_command) != 0)
 			free(final_cmd);
 		return (0);
 	}

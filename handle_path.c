@@ -18,6 +18,7 @@ char *get_path(char *first_command)
 		return (first_command);
 
 	if (cmd_path)
+	{
 		cmd_path_copy = _strdup(cmd_path_copy, cmd_path);
 		length_user_command = s_len(first_command);
 		parse_token = _strtok(cmd_path_copy, delimiter);
@@ -36,13 +37,16 @@ char *get_path(char *first_command)
 			s_cat(path_to_file, "\0");
 
 			if (stat(path_to_file, &path_test) == 0)
+			{
 				free(cmd_path_copy);
 				free(parse_token);
 				return (path_to_file);
+			}
 			free(path_to_file);
 			free(parse_token);
 			parse_token = _strtok(NULL, delimiter);
 		}
+	}
 	free(cmd_path_copy);
 	return (NULL);
 }

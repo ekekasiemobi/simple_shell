@@ -27,23 +27,18 @@ int shell_setenv(char **args);
 int shell_unsetenv(char **args);
 int handle_env_commands(char **args);
 
-typedef struct data_shell {
-    char **_environ;
-    int status;
+typedef struct data_shell
+{
+	char **_environ;
+	int status;
 } data_shell;
 void execute_shell(void *datash, char **receive_argv);
 int _env(data_shell *datash);
 
 char *_strtok(char *str, const char *delim);
- char *_strdup(char *dup, char *str);
+char *_strdup(char *dup, char *str);
 char *get_path(char *first_command);
 
-typedef int (*command_func)(void);
-
-typedef struct {
-    char *name;
-    int (*func)(void);
-} command_t;
 
 char *prompt_read(ssize_t *fd_check);
 int execute_command(char **receive_argv);
@@ -75,15 +70,16 @@ int _strcmp(char *s, char *c);
 void exit_shell(char **tokenized_command);
 void execute_cmd(char **command, int command_type);
 int determine_command_type(char *command);
- int _atoi(char *s);
+int _atoi(char *s);
 
- void free_array(char **argv);
+void free_array(char **argv);
 
-typedef struct {
-    char** argv;
+typedef struct
+{
+	char **argv;
 } info_t;
-int _mycd(info_t* info);
- char *_getenv(const char *name);
+int _mycd(info_t *info);
+char *_getenv(const char *name);
 
 #endif
 
