@@ -27,26 +27,27 @@ char **tokenization(char *take_user_input, char **argv, ssize_t fd_check)
 	/* add null byte to end */
 	s_copy(user_input_copy, take_user_input);
 
-	parse_token = _strtok(take_user_input, delimiter);
+	parse_token = strtok(take_user_input, delimiter);
 
 	while (parse_token != NULL)
 	{
 		token_count++;
-		parse_token = _strtok(NULL, delimiter);
+		parse_token = strtok(NULL, delimiter);
 	}
 	token_count++;
 
 
 	argv = malloc(sizeof(char *) * token_count);
-	parse_token = _strtok(user_input_copy, delimiter);
+	parse_token = strtok(user_input_copy, delimiter);
 	for (num = 0; parse_token != NULL; num++)
 	{
 		token_length = s_len(parse_token);
 		argv[num] = malloc(sizeof(char) * token_length + 1);
 		argv[num][token_length] = '\0';
 		s_copy(argv[num], parse_token);
-		parse_token = _strtok(NULL, delimiter);
+		parse_token = strtok(NULL, delimiter);
 	}
 	argv[num] = NULL;
+	free(user_input_copy);
 	return (argv);
 }

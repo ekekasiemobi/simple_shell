@@ -48,7 +48,6 @@ int shell_unsetenv(char **args)
 
 /**
  * handle_env_commands - Handle setenv, unsetenv, and echo commands
- * @command: The command to handle
  * @args: Array of arguments
  * Return: 1 if handled, 0 if not handled
  */
@@ -59,9 +58,7 @@ int handle_env_commands(char **args)
 	if (strcmp(args[0], "setenv") == 0)
 	{
 		if (args[1] == NULL || args[2] == NULL)
-		{
 			return (-1);
-		}
 		if (shell_setenv(args) == -1)
 			print_error(args, "Failed to set environment variable\n");
 		return (1);
@@ -74,8 +71,7 @@ int handle_env_commands(char **args)
 			return (-1);
 		}
 		if (unsetenv(args[1]) == -1)
-		{
-			write(STDERR_FILENO, "Failed to unset environment variable\n", 37);
+		{	write(STDERR_FILENO, "Failed to unset environment variable\n", 37);
 			return (-1);
 		}
 		shell_unsetenv(args);
@@ -84,20 +80,16 @@ int handle_env_commands(char **args)
 	else if (strcmp(args[0], "echo") == 0)
 	{
 		if (args[1] == NULL)
-		{
-			write(STDERR_FILENO, "Usage: echo VARIABLE\n", 21);
+		{	write(STDERR_FILENO, "Usage: echo VARIABLE\n", 21);
 			return (-1);
 		}
 		value = getenv(args[1]);
 		if (value != NULL)
-		{
-			write(STDOUT_FILENO, value, strlen(value));
+		{	write(STDOUT_FILENO, value, strlen(value));
 			write(STDOUT_FILENO, "\n", 1);
 		}
 		else
-		{
 			write(STDOUT_FILENO, "$\n", 2);
-		}
 		return (1);
 	}
 	return (0);
