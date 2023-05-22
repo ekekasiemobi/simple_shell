@@ -7,17 +7,21 @@
 char *get_path(char *first_command)
 {
 	struct stat path_test;
-	char *cmd_path, *cmd_path_copy, *delimiter,  *path_to_file, *parse_token;
+	char *cmd_path, *cmd_path_copy = NULL, *delimiter;
+	char *path_to_file, *parse_token;
 	int dir_len, length_user_command, path_to_file_len, i;
 
 	delimiter = ":";
 	cmd_path = _getenv("PATH");
 
+	if (stat(first_command, &path_test) == 0)
+		return (first_command);
+
 	if (cmd_path)
 	{
-		cmd_path_copy = strdup(cmd_path);
+		cmd_path_copy = _strdup(cmd_path_copy, cmd_path);
 		length_user_command = s_len(first_command);
-		parse_token = strtok(cmd_path_copy, delimiter);
+		parse_token = _strtok(cmd_path_copy, delimiter);
 
 		while (parse_token != NULL)
 		{
@@ -35,14 +39,15 @@ char *get_path(char *first_command)
 			if (stat(path_to_file, &path_test) == 0)
 			{
 				free(cmd_path_copy);
+				free(parse_token);
 				return (path_to_file);
 			}
 			free(path_to_file);
-			parse_token = strtok(NULL, delimiter);
+			free(parse_token);
+			parse_token = _strtok(NULL, delimiter);
 		}
 	}
 	free(cmd_path_copy);
-	if (stat(first_command, &path_test) == 0)
-		return (first_command);
 	return (NULL);
 }
+

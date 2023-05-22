@@ -24,7 +24,7 @@ char *prompt_read(ssize_t *fd_check)
 			write(STDOUT_FILENO, "\n", 1);
 		exit(EXIT_SUCCESS);
 	}
-	*fd_check = strlen(user_input);
+	*fd_check = s_len(user_input);
 
 	if (*fd_check == -1 && isatty(STDIN_FILENO))
 	{

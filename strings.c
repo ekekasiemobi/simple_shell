@@ -79,6 +79,7 @@ int _strcspn(char *s, char *charset)
 	return (count);
 }
 
+
 /**
  * _strcmp - compares two strings
  * @s: first string to compare

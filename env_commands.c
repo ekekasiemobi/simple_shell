@@ -1,6 +1,4 @@
 #include "main.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 /**
  * shell_setenv - Set a new environment variable or modify an existing one
