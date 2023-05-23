@@ -9,7 +9,7 @@ int main(int ac, char **argv)
 {
 	char *user_input, **receive_argv;
 	ssize_t fd_check;
-	int i, execution_status;
+	int i, execution_status, cd_result;
 	data_shell shell_data;
 
 	shell_data._environ = environ;
@@ -24,14 +24,15 @@ int main(int ac, char **argv)
 		receive_argv = tokenization(user_input, receive_argv, fd_check);
 		if (receive_argv[0] == NULL)
 			continue;
+		if (strcmp(receive_argv[0], "env") == 0)
+			handle_env(user_input, &shell_data);
 		if (strcmp(receive_argv[0], "exit") == 0)
 			handle_exit(user_input, receive_argv);
-		if (strcmp(receive_argv[0], "env") == 0)
-		{
-			free(user_input);
-			_env(&shell_data);
-			continue;
-		}
+		if (_strcmp(receive_argv[0], "cd") == 0)
+			cd_result = cd_command(receive_argv);
+			if (cd_result == -1)
+				print_error(receive_argv, "cd failed\n");
+				continue;
 		i = handle_env_commands(receive_argv);
 		if (i != 0)
 		{
@@ -47,5 +48,3 @@ int main(int ac, char **argv)
 	}
 	return (0);
 }
-
-

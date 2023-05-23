@@ -19,7 +19,10 @@
 #define MAX_ARGS 10
 #define BUFFER_SIZE 1024
 
+int cd_command(char **args);
+
 extern char **environ;
+
 char *_getline(void);
 void display_exit_error(char *shell_name, char *arg);
 void handle_exit(char *user_input, char **receive_argv);
@@ -32,9 +35,11 @@ typedef struct data_shell {
     char **_environ;
     int status;
 } data_shell;
+
 void execute_shell(void *datash, char **receive_argv);
 /*int _env(data_shell *datash);*/
 int _env(data_shell *shell_data);
+ void handle_env(char *user_input, data_shell *shell_data);
 
 
 char *get_path(char *first_command);

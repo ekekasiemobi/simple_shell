@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * _env - lists the enviromental variables
+ * _env - shows all environ datas
  *
- * @shell_data: the date.
- * Return: return 1 when successful
+ * @shell_data: the environ data
+ * Return: when successful returns 1
  */
 int _env(data_shell *shell_data)
 {
@@ -28,3 +28,17 @@ int _env(data_shell *shell_data)
 
 	return (1);
 }
+
+
+/**
+ * handle_env - Handle 'env' command
+ * @user_input: User input string
+ * @datash: Shell data structure
+ */
+
+void handle_env(char *user_input, data_shell *shell_data)
+{
+	free(user_input);
+	_env(shell_data);
+}
+
