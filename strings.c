@@ -1,67 +1,68 @@
 #include "main.h"
 
 /**
- * _atoi - changes a string to an integer
- * @s: string to changed
+ * _atoi - changes strings to integer
+ * @s: string to be converteed
  *
- * Return: the converted int
+ * Return: string converted
  */
-int _atoi(char *s)
+int _atoi(char *str)
 {
-	unsigned int n = 0;
+	unsigned int result = 0;
+	int i = 0;
 
-	do {
-		if (*s == '-')
+	for (i = 0; str[i] != '\0'; i++) 
+	{
+		if (str[i] == '-')
 		{
 			return (-1);
 		}
-		else if ((*s < '0' || *s > '9') && *s != '\0')
+		else if ((str[i] < '0' || str[i] > '9') && str[i] != '\0')
 		{
 			return (-1);
 		}
-		else if (*s >= '0'  && *s <= '9')
+		else if (str[i] >= '0'  && str[i] <= '9')
 		{
-			n = (n * 10) + (*s - '0');
+			result = (result * 10) + (str[i] - '0');
 		}
-		else if (n > 0)
+		else if (result > 0)
 		{
 			break;
 		}
-	} while (*s++);
+	}
 
-	return (n);
+	return (result);
 }
 
 /**
- * _strchr - locates a char in a string
- * @s: string to be searched
- * @c: char to be checked
+ * _strchr - finds a character c in a string s
+ * @s: string where c is to be searched
+ * @c: the character to be checked which is c
  *
- * Return: pointer to the first occurrence of `c` in `s`
+ * Return: the first occurrence of character `c` in string `s`
  */
 char *_strchr(char *s, char c)
 {
 	int i = 0;
 
-	for (; s[i] != c && s[i] != '\0'; i++)
-		;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			return (s + i);
+		}
+		i++;
+	}
 
-	if (s[i] == c)
-	{
-		return (s + i);
-	}
-	else
-	{
-		return (NULL);
-	}
+	return NULL;
 }
 
 /**
- * _strcspn - computes segment of str
- * @s: string to be searched
- * @charset: string to be used
+ * _strcspn - finds char not found in the charset
+ * @s: the string 's' to be checked
+ * @charset: the  string 'charset' to be checked
  *
- * Return: index at which a char in `s` exists in `charset`
+ * Return: the point where a char in `s` is found in `charset`
  */
 int _strcspn(char *s, char *charset)
 {
@@ -80,11 +81,11 @@ int _strcspn(char *s, char *charset)
 }
 
 /**
- * _strcmp - compares two strings
- * @s: first string to compare
- * @c: second string to compare
+ * _strcmp - it  compares two str
+ * @s: first str 's' to be compared
+ * @c: second str 'c' to be compared
  *
- * Return: return 1 when strings match
+ * Return: returns 1 when str in 's' and 'c' matches
  */
 int _strcmp(char *s, char *c)
 {

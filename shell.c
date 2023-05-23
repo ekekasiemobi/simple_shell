@@ -10,9 +10,9 @@ int main(int ac, char **argv)
 	char *user_input, **receive_argv;
 	ssize_t fd_check;
 	int i, execution_status;
-	data_shell datash;
+	data_shell shell_data;
 
-	datash._environ = environ;
+	shell_data._environ = environ;
 	(void)ac;
 	(void)argv;
 
@@ -29,7 +29,7 @@ int main(int ac, char **argv)
 		if (strcmp(receive_argv[0], "env") == 0)
 		{
 			free(user_input);
-			_env(&datash);
+			_env(&shell_data);
 			continue;
 		}
 		i = handle_env_commands(receive_argv);
@@ -49,19 +49,3 @@ int main(int ac, char **argv)
 }
 
 
-/**
- * free_array - Frees a dynamically allocated array of strings.
- * @argv: The array of strings to be freed.
- *
- */
-void free_array(char **argv)
-{
-	char **temp = argv;
-
-	for (; *temp != NULL; temp++)
-	{
-		free(*temp);
-		*temp = NULL;
-	}
-	free(argv);
-}
