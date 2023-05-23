@@ -23,3 +23,16 @@ int _env(data_shell *datash)
 
 	return (1);
 }
+
+
+/**
+ * handle_env - Handle 'env' command
+ * @user_input: User input string
+ * @datash: Shell data structure
+ */
+
+void handle_env(char *user_input, data_shell *shell_data)
+{
+	free(user_input);
+	_env(shell_data);
+}

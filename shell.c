@@ -9,10 +9,10 @@ int main(int ac, char **argv)
 {
 	char *user_input, **receive_argv;
 	ssize_t fd_check;
-	int i, execution_status;
-	data_shell datash;
+	int i, execution_status, cd_result;
+	data_shell shell_data;
 
-	datash._environ = environ;
+	shell_data._environ = environ;
 	(void)ac;
 	(void)argv;
 
@@ -24,14 +24,15 @@ int main(int ac, char **argv)
 		receive_argv = tokenization(user_input, receive_argv, fd_check);
 		if (receive_argv[0] == NULL)
 			continue;
-		if (_strcmp(receive_argv[0], "exit") == 0)
+		if (strcmp(receive_argv[0], "env") == 0)
+			handle_env(user_input, &shell_data);
+		if (strcmp(receive_argv[0], "exit") == 0)
 			handle_exit(user_input, receive_argv);
-		if (_strcmp(receive_argv[0], "env") == 0)
-		{
-			free(user_input);
-			_env(&datash);
-			continue;
-		}
+		if (_strcmp(receive_argv[0], "cd") == 0)
+			cd_result = cd_command(receive_argv);
+			if (cd_result == -1)
+				print_error(receive_argv, "cd failed\n");
+				continue;
 		i = handle_env_commands(receive_argv);
 		if (i != 0)
 		{
@@ -46,22 +47,4 @@ int main(int ac, char **argv)
 		free_array(receive_argv);
 	}
 	return (0);
-}
-
-
-/**
- * free_array - Frees a dynamically allocated array of strings.
- * @argv: The array of strings to be freed.
- *
- */
-void free_array(char **argv)
-{
-	char **temp = argv;
-
-	for (; *temp != NULL; temp++)
-	{
-		free(*temp);
-		*temp = NULL;
-	}
-	free(argv);
 }

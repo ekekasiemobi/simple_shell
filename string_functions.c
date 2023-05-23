@@ -1,6 +1,22 @@
 #include "main.h"
 
 
+/**
+ * free_array - Frees a dynamically allocated array of strings.
+ * @argv: The array of strings to be freed.
+ *
+ */
+void free_array(char **argv)
+{
+	char **temp = argv;
+
+	for (; *temp != NULL; temp++)
+	{
+		free(*temp);
+		*temp = NULL;
+	}
+	free(argv);
+}
 
 /**
  * s_len - counts the length of a string
