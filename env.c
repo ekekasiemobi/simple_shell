@@ -1,29 +1,33 @@
 #include "main.h"
 
 /**
- * _env - lists the enviromental variables
+ * _env - shows all environ datas
  *
- * @datash: the date.
- * Return: return 1 when successful
+ * @shell_data: the environ data
+ * Return: when successful returns 1
  */
-int _env(data_shell *datash)
+int _env(data_shell *shell_data)
 {
-	int i, j;
+	int i = 0;
 
-	for (i = 0; datash->_environ[i]; i++)
+	while (shell_data->_environ[i])
 	{
+		int j = 0;
 
-		for (j = 0; datash->_environ[i][j]; j++)
-			;
+		while (shell_data->_environ[i][j])
+		{
+			write(STDOUT_FILENO, &shell_data->_environ[i][j], 1);
+			j++;
+		}
 
-		write(STDOUT_FILENO, datash->_environ[i], j);
 		write(STDOUT_FILENO, "\n", 1);
+		i++;
 	}
-	datash->status = 0;
+
+	shell_data->status = 0;
 
 	return (1);
 }
-
 
 /**
  * handle_env - Handle 'env' command

@@ -39,7 +39,7 @@ typedef struct data_shell
 	int status;
 } data_shell;
 void execute_shell(void *datash, char **receive_argv);
-int _env(data_shell *datash);
+int _env(data_shell *shell_data);
 void handle_env(char *user_input, data_shell *shell_data);
 
 char *_strtok(char *str, const char *delim);
