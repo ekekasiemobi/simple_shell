@@ -11,6 +11,7 @@ int main(int ac, char **argv)
 	ssize_t fd_check;
 	int i, execution_status;
 	data_shell datash;
+	int cd_result;
 
 	datash._environ = environ;
 	(void)ac;
@@ -31,6 +32,13 @@ int main(int ac, char **argv)
 			free(user_input);
 			_env(&datash);
 			continue;
+		}
+		if (_strcmp(receive_argv[0], "cd") == 0)
+		{
+		cd_result = cd_command(receive_argv);
+		if (cd_result == -1)
+			print_error(receive_argv, "cd failed\n");
+		continue;
 		}
 		i = handle_env_commands(receive_argv);
 		if (i != 0)

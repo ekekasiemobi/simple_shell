@@ -27,6 +27,12 @@ int shell_setenv(char **args);
 int shell_unsetenv(char **args);
 int handle_env_commands(char **args);
 
+/**
+ * struct data_shell - Structure representing shell data
+ *
+ * @_environ: Pointer to an array of strings
+ * @status: Integer representing the status of the shell
+ */
 typedef struct data_shell
 {
 	char **_environ;
@@ -74,12 +80,20 @@ int _atoi(char *s);
 
 void free_array(char **argv);
 
-typedef struct
+/**
+ * struct info_t - Structure containing command line arguments
+ *
+ * @argv: Pointer to an array of strings
+ */
+typedef struct info_t
 {
 	char **argv;
 } info_t;
+
 int _mycd(info_t *info);
 char *_getenv(const char *name);
 
-#endif
+int cd_command(char **args);
 
+
+#endif
