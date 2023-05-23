@@ -73,7 +73,8 @@ char *_strchr(char *s, char c);
 int _strcspn(char *s, char *charset);
 int _strcmp(char *s, char *c);
 
-void exit_shell(char **tokenized_command);
+void exit_shell(char **command);
+void display_exit_error(char *shell_name, char *arg);
 void execute_cmd(char **command, int command_type);
 int determine_command_type(char *command);
 int _atoi(char *s);

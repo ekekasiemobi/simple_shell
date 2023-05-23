@@ -1,51 +1,48 @@
 #include "main.h"
 /**
- * exit_shell - exits shell
- * @tokenized_command: command entered
+ * exit_shell - this function exits the simple_shell
+ * @command: this is the cmd entered
  *
- * Return: void
+ * Return: returns nothing when the shell is exited
  */
-void exit_shell(char **tokenized_command)
+void exit_shell(char **command)
 {
 	char *shell_name = NULL;
 	char *line = NULL;
 	char **cmds = NULL;
 	int status = 0;
-	int num_token = 0, arg;
-	const char *error_message = "$: too many arguments\n";
+	int i = 0, arg;
+	const char *error_msg = "$: too many arguments\n";
 
-	for (; tokenized_command[num_token] != NULL; num_token++)
-		;
+	while (command[i] != NULL)
+		i++;
 	{
 
-		if (num_token == 1)
+		if (i == 1)
 		{
-			free_array(tokenized_command);
+			free_array(command);
 			free(line);
 			free(cmds);
 			exit(status);
 		}
-		else if (num_token == 2)
+		else if (i == 2)
 		{
-			arg = _atoi(tokenized_command[1]);
+			arg = _atoi(command[1]);
 			if (arg == -1)
 			{
-				write(STDERR_FILENO, shell_name, strlen(shell_name));
-				write(STDERR_FILENO, ": 1: exit: error ", strlen(": 1: exit: error "));
-				write(STDERR_FILENO, tokenized_command[1], strlen(tokenized_command[1]));
-				write(STDERR_FILENO, "\n", 1);
+				display_exit_error(shell_name, command[1]);
 				status = 2;
 			}
 			else
 			{
 				free(line);
-				free(tokenized_command);
+				free(command);
 				free(cmds);
 				exit(arg);
 			}
 		}
 		else
-		write(STDERR_FILENO, error_message, strlen(error_message));
+		write(STDERR_FILENO, error_msg, strlen(error_msg));
 	}
 }
 
