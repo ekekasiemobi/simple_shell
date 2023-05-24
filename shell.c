@@ -9,7 +9,7 @@ int main(int ac, char **argv)
 {
 	char *user_input, **receive_argv;
 	ssize_t fd_check;
-	int i, execution_status, cd_result;
+	int i, execution_status = 0, cd_result;
 	data_shell shell_data;
 
 	shell_data._environ = environ;
