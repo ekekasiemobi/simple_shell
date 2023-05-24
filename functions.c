@@ -37,18 +37,6 @@ void print_error(char **av, char *err)
 
 
 /**
- * display_exit_error - Display exit error message
- * @shell_name: Name of the shell
- * @arg: Argument causing the error
- */
-void display_exit_error(char *shell_name, char *arg)
-{
-	write(STDERR_FILENO, shell_name, strlen(shell_name));
-	write(STDERR_FILENO, ": 1: exit: error ", strlen(": 1: exit: error "));
-	write(STDERR_FILENO, arg, strlen(arg));
-	write(STDERR_FILENO, "\n", 1);
-}
-/**
  * cd_check_args - Check and process the arguments for the cd command
  *
  * @args: The command arguments

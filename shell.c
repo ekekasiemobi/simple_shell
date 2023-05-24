@@ -32,7 +32,12 @@ int main(int ac, char **argv)
 			continue;
 		}
 		if (_strcmp(receive_argv[0], "exit") == 0)
-			handle_exit(user_input, receive_argv);
+		{
+			free(user_input);
+			exit_shell(receive_argv);
+			free_array(receive_argv);
+			continue;
+		}
 		if (_strcmp(receive_argv[0], "cd") == 0)
 		{
 		cd_result = cd_command(receive_argv);

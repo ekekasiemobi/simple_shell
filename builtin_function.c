@@ -5,38 +5,34 @@
  *
  * Return: returns nothing when the shell is exited
  */
-void exit_shell(char **command)
+void exit_shell(char **receive_argv)
 {
-	char *shell_name = NULL;
-	char *line = NULL;
 	char **cmds = NULL;
 	int status = 0;
 	int i = 0, arg;
 	const char *error_msg = "$: too many arguments\n";
 
-	while (command[i] != NULL)
+	while (receive_argv[i] != NULL)
 		i++;
 	{
 
 		if (i == 1)
 		{
-			free_array(command);
-			free(line);
+			free_array(receive_argv);
 			free(cmds);
 			exit(status);
 		}
 		else if (i == 2)
 		{
-			arg = _atoi(command[1]);
+			arg = _atoi(receive_argv[1]);
 			if (arg == -1)
 			{
-				display_exit_error(shell_name, command[1]);
+				print_error(receive_argv, "Illegal number:\n");
 				status = 2;
 			}
 			else
 			{
-				free(line);
-				free_array(command);
+				free_array(receive_argv);
 				free(cmds);
 				exit(arg);
 			}
@@ -47,13 +43,4 @@ void exit_shell(char **command)
 }
 
 
-/**
- * handle_exit - Handle 'exit' command
- * @user_input: User input string
- * @receive_argv: Array of command arguments
- */
-void handle_exit(char *user_input, char **receive_argv)
-{
-	free(user_input);
-	exit_shell(receive_argv);
-}
+
