@@ -28,6 +28,7 @@ int main(int ac, char **argv)
 		{
 			free(user_input);
 			_env(&shell_data);
+			free_array(receive_argv);
 			continue;
 		}
 		if (_strcmp(receive_argv[0], "exit") == 0)

@@ -44,6 +44,6 @@ char *get_path(char *first_command)
 			parse_token = _strtok(NULL, delimiter);
 		}
 	}
-	/*free(cmd_path_copy);*/
+	free(cmd_path_copy);
 	return (NULL);
 }
