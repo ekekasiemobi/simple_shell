@@ -32,7 +32,7 @@ int _env(data_shell *shell_data)
 /**
  * handle_env - Handle 'env' command
  * @user_input: User input string
- * @datash: Shell data structure
+ * @shell_data: Shell data structure
  */
 
 void handle_env(char *user_input, data_shell *shell_data)

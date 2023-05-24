@@ -36,7 +36,7 @@ void exit_shell(char **command)
 			else
 			{
 				free(line);
-				free(command);
+				free_array(command);
 				free(cmds);
 				exit(arg);
 			}
