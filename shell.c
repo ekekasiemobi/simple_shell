@@ -54,7 +54,7 @@ int main(int ac, char **argv)
 		}
 		execution_status = execute_command(receive_argv);
 		if (execution_status == 1)
-			print_error(receive_argv, "Command not found\n");
+			print_error(receive_argv, "not found\n");
 		free(user_input);
 		free_array(receive_argv);
 	}
