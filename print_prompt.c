@@ -2,48 +2,40 @@
 
 /**
  * prompt_read - read prompts and displays inputs
- * @fd_check: the number of byte read by getline
+ * @fd_check: the number of bytes read by getline
  * Return: user_input
  */
 
 char *prompt_read(ssize_t *fd_check)
 {
-	char *display_prompt = "$ ";
-	char *user_input = NULL;
+        char *display_prompt = "$ ";
+        char *user_input = NULL;
+        size_t bufsize = 0;
+		ssize_t read_bytes;
 
-	/* interactive_mode() */
-	if (isatty(STDIN_FILENO))
-	{
-		write(STDOUT_FILENO, display_prompt, 2);
-	}
+        /* interactive_mode() */
+        if (isatty(STDIN_FILENO))
+        {
+                write(STDOUT_FILENO, display_prompt, 2);
+        }
 
-	user_input = _getline();
-	if (user_input == NULL)
-	{
-		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "\n", 1);
-		exit(EXIT_SUCCESS);
-	}
-	*fd_check = s_len(user_input);
+        read_bytes = getline(&user_input, &bufsize, stdin);
+        if (read_bytes == -1)
+        {
+                if (isatty(STDIN_FILENO))
+                        write(STDOUT_FILENO, "\n", 1);
+                free(user_input);
+                exit(EXIT_SUCCESS);
+        }
+        *fd_check = read_bytes;
 
-	if (*fd_check == -1 && isatty(STDIN_FILENO))
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		free(user_input);
-		exit(EXIT_SUCCESS);
-	}
-	else if (*fd_check == -1)
-	{
-		free(user_input);
-		exit(EXIT_SUCCESS);
-	}
-	if (*fd_check == 0 && isatty(STDIN_FILENO))
-	{
-		free(user_input);
-		return (prompt_read(fd_check));
-	}
+        if (*fd_check == 1 && user_input[0] == '\n')
+        {
+                free(user_input);
+                return prompt_read(fd_check);
+        }
 
-	/*write(STDOUT_FILENO, user_input, byte_size);*/
-	user_input[_strcspn(user_input, "\n")] = '\0';
-	return (user_input);
+        user_input[strcspn(user_input, "\n")] = '\0';
+        return user_input;
 }
+
