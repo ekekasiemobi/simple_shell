@@ -27,7 +27,9 @@ void exit_shell(char **receive_argv)
 			arg = _atoi(receive_argv[1]);
 			if (arg == -1)
 			{
-				print_error(receive_argv, "Illegal number:\n");
+				print_error(receive_argv, "Illegal number: ");
+				_errputs(receive_argv[1]);
+				_errputs("\n");
 				status = 2;
 			}
 			else
