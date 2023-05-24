@@ -25,7 +25,7 @@ void exit_shell(char **receive_argv, int execution_status)
 		else if (i == 2)
 		{
 			arg = _atoi(receive_argv[1]);
-			if (arg == -1)
+			if (arg < 0)
 			{
 				print_error(receive_argv, "Illegal number: ");
 				_errputs(receive_argv[1]);
