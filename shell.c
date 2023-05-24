@@ -34,7 +34,7 @@ int main(int ac, char **argv)
 		if (_strcmp(receive_argv[0], "exit") == 0)
 		{
 			free(user_input);
-			exit_shell(receive_argv);
+			exit_shell(receive_argv, execution_status);
 			free_array(receive_argv);
 			continue;
 		}

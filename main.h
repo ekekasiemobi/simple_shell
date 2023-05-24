@@ -38,7 +38,7 @@ typedef struct data_shell
 	char **_environ;
 	int status;
 } data_shell;
-void execute_shell(void *datash, char **receive_argv);
+/*void execute_shell(void *datash, char **receive_argv);*/
 int _env(data_shell *shell_data);
 void handle_env(char *user_input, data_shell *shell_data);
 
@@ -74,7 +74,7 @@ char *_strchr(char *s, char c);
 int _strcspn(char *s, char *charset);
 int _strcmp(char *s, char *c);
 
-void exit_shell(char **receive_argv);
+void exit_shell(char **receive_argv, int execution_status);
 void execute_cmd(char **command, int command_type);
 int determine_command_type(char *command);
 int _atoi(char *s);
