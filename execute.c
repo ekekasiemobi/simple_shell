@@ -8,7 +8,7 @@ int execute_command(char **receive_argv)
 {
 	char *first_command, *final_cmd;
 	pid_t child_process;
-	int process_status;
+	int process_status = 0;
 
 	first_command = NULL;
 	final_cmd = NULL;
@@ -42,7 +42,11 @@ int execute_command(char **receive_argv)
 		}
 		if (_strcmp(final_cmd, first_command) != 0)
 			free(final_cmd);
-		return (0);
+		if (WIFEXITED(process_status))
+		{
+			process_status = WEXITSTATUS(process_status);
+		}
+		return(process_status);
 	}
 	free(final_cmd);
 	return (1);

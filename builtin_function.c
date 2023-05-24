@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * exit_shell - this function exits the simple_shell
- * @command: this is the cmd entered
+ * @receive_argv: this is the cmd entered
  *
  * Return: returns nothing when the shell is exited
  */
