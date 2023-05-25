@@ -21,7 +21,6 @@
 
 extern char **environ;
 char *_getline(void);
-void handle_exit(char *user_input, char **receive_argv);
 
 int shell_setenv(char **args);
 int shell_unsetenv(char **args);
@@ -68,15 +67,12 @@ char **split_string(char *string);
 
 void print_error(char **av, char *err);
 int _errputs(char *str);
-void print_error(char **av, char *err);
 
 char *_strchr(char *s, char c);
 int _strcspn(char *s, char *charset);
 int _strcmp(char *s, char *c);
 
 void exit_shell(char **receive_argv, int execution_status);
-void execute_cmd(char **command, int command_type);
-int determine_command_type(char *command);
 int _atoi(char *s);
 
 void free_array(char **argv);

@@ -18,7 +18,6 @@ int execute_command(char **receive_argv)
 
 	if (final_cmd == NULL)
 		return (1);
-
 	if (receive_argv && access(final_cmd, X_OK) != -1)
 	{
 		child_process = fork();
@@ -31,9 +30,8 @@ int execute_command(char **receive_argv)
 		{
 
 			if (execve(final_cmd, receive_argv, NULL) == -1)
-			{
 				print_error(receive_argv, "command not found\n");
-			}
+
 		}
 		else
 		{
@@ -43,10 +41,8 @@ int execute_command(char **receive_argv)
 		if (_strcmp(final_cmd, first_command) != 0)
 			free(final_cmd);
 		if (WIFEXITED(process_status))
-		{
 			process_status = WEXITSTATUS(process_status);
-		}
-		return(process_status);
+		return (process_status);
 	}
 	free(final_cmd);
 	return (1);
