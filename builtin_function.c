@@ -2,6 +2,7 @@
 /**
  * exit_shell - this function exits the simple_shell
  * @receive_argv: this is the cmd entered
+ * @execution_status: this is the status of the exit function
  *
  * Return: returns nothing when the shell is exited
  */
